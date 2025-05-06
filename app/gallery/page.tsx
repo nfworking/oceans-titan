@@ -10,17 +10,15 @@ import { NavBar } from "@/components/nav-bar"
 import { Footer } from "@/components/footer"
 
 // Pre-load the model to prevent loading issues
-useGLTF.preload("/assets/3d/duck.glb")
+useGLTF.preload("/assets/3d/model1.glb")
 
 // Staghorn Coral Model - Rotating model
-function StaghornModel({ scale = 0.5 }) {
+function StaghornModel({ scale = 0 }) {
   const ref = useRef()
-  const { scene } = useGLTF("/assets/3d/duck.glb", true)
+  const { scene } = useGLTF("/assets/3d/model1.glb", true)
 
   // Add rotation animation
-  useFrame((state) => {
-    ref.current.rotation.y = state.clock.getElapsedTime() * 0.2
-  })
+
 
   return (
     <group ref={ref}>
@@ -32,17 +30,14 @@ function StaghornModel({ scale = 0.5 }) {
 // Brain Coral Model - Pulsing model
 function BrainModel({ scale = 0.5 }) {
   const ref = useRef()
-  const { scene } = useGLTF("/assets/3d/duck.glb", true)
+  const { scene } = useGLTF("/assets/3d/model1.glb", true)
 
   // Add pulsing animation
-  useFrame((state) => {
-    const pulse = Math.sin(state.clock.getElapsedTime() * 2) * 0.05 + 1
-    ref.current.scale.set(scale * 2 * pulse, scale * 2 * pulse, scale * 2 * pulse)
-  })
+
 
   return (
     <group ref={ref}>
-      <primitive object={scene.clone()} position={[0, -0.5, 0]} />
+      <primitive object={scene.clone()} />
     </group>
   )
 }
@@ -50,13 +45,10 @@ function BrainModel({ scale = 0.5 }) {
 // Elkhorn Coral Model - Swaying model
 function ElkhornModel({ scale = 0.5 }) {
   const ref = useRef()
-  const { scene } = useGLTF("/assets/3d/duck.glb", true)
+  const { scene } = useGLTF("/assets/3d/model1.glb", true)
 
   // Add swaying animation
-  useFrame((state) => {
-    ref.current.rotation.z = Math.sin(state.clock.getElapsedTime()) * 0.1
-    ref.current.position.y = Math.sin(state.clock.getElapsedTime() * 0.5) * 0.2 - 0.5
-  })
+
 
   return (
     <group ref={ref}>
@@ -95,33 +87,26 @@ function CoralViewer({ coral }) {
       </div>
 
       <div className="h-[300px] w-full rounded-none border border-gray-800 border-y-0 bg-gradient-to-b from-gray-900 to-black/50">
-        <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-          <color attach="background" args={["#000"]} />
-          <fog attach="fog" args={["#000", 5, 15]} />
-
-          <Suspense
-            fallback={
-              <Html center>
-                <div className="rounded-md bg-black/80 p-4 text-white">
-                  <p>Loading 3D model...</p>
-                </div>
-              </Html>
-            }
-          >
-            <PresentationControls
-              global
-              zoom={0.8}
-              rotation={[0, 0, 0]}
-              polar={[-Math.PI / 4, Math.PI / 4]}
-              azimuth={[-Math.PI / 4, Math.PI / 4]}
-            >
-              <ModelComponent />
-            </PresentationControls>
-
+      <Canvas camera={{ position: [15, 175, 15], fov: 30 }}>
+          <Suspense fallback={<Html center><p>Loading...</p></Html>}>
+            <ambientLight intensity={1} />
+            <directionalLight position={[5, 5, 5]} intensity={1} />
+            <ModelComponent />
             <Environment preset="sunset" />
-            <OrbitControls enableZoom={true} enablePan={true} enableRotate={true} minDistance={2} maxDistance={10} />
+
+            {/* Use only OrbitControls */}
+            <OrbitControls
+  enableZoom={true}
+  enablePan={true}
+  enableRotate={true}
+  minDistance={1}   // Minimum zoom distance (closer to the model)
+  maxDistance={175}
+  zoomSpeed={2}
+   // Maximum zoom distance (further from the model)
+  />
           </Suspense>
         </Canvas>
+
       </div>
 
       <div className="flex items-center justify-center space-x-2 rounded-none border border-gray-800 border-b-0 bg-gradient-to-b from-black/50 to-gray-900 p-2 text-xs text-gray-400">

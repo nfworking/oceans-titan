@@ -27,7 +27,7 @@ export default function Home() {
       <section ref={ref} className="relative h-screen overflow-hidden">
         <motion.div style={{ opacity, scale }} className="absolute inset-0 z-0">
           <video autoPlay muted loop playsInline className="absolute inset-0 h-full w-full object-cover">
-            <source src="/videos/coral-reef.mp4" type="video/mp4" />
+            <source src="/coral-reef.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/50" />
         </motion.div>
