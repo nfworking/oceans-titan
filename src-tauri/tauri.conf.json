@@ -2,18 +2,18 @@
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "oceans-titan",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "Oceans.dev",
   "build": {
     "frontendDist": "../out",
     "devUrl": "http://localhost:3000",
-    "beforeDevCommand": "pnpm dev",
-    "beforeBuildCommand": "pnpm build"
+    "beforeDevCommand": "pnpm run dev",
+    "beforeBuildCommand": "pnpm run build"
   },
   "app": {
     "windows": [
       {
         "title": "Oceans Conservation",
-        "width": 800,
+        "width": 1000,
         "height": 600,
         "resizable": true,
         "fullscreen": false
@@ -25,7 +25,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": "all",
+    "targets": "msi",
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
