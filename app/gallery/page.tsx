@@ -18,9 +18,7 @@ function StaghornModel({ scale = 0 }) {
   const { scene } = useGLTF("/assets/3d/model1.glb", true)
 
   // Add rotation animation
-
-
-  return (
+ return (
     <group ref={ref}>
       <primitive object={scene.clone()} scale={scale * 2} position={[0, -0.5, 0]} />
     </group>
@@ -28,32 +26,26 @@ function StaghornModel({ scale = 0 }) {
 }
 
 // Brain Coral Model - Pulsing model
-function BrainModel({ scale = 0.5 }) {
+function BrainModel({ scale = 0 }) {
   const ref = useRef()
-  const { scene } = useGLTF("/assets/3d/model1.glb", true)
-
-  // Add pulsing animation
-
+  const { scene } = useGLTF("/assets/3d/model2.glb", true)
 
   return (
     <group ref={ref}>
-      <primitive object={scene.clone()} />
-    </group>
+    <primitive object={scene.clone()} scale={100} position={[0, -20, 0]} />
+  </group>
   )
 }
 
 // Elkhorn Coral Model - Swaying model
-function ElkhornModel({ scale = 0.5 }) {
+function ElkhornModel({ scale = 100 }) {
   const ref = useRef()
-  const { scene } = useGLTF("/assets/3d/model1.glb", true)
+  const { scene } = useGLTF("/assets/3d/model3.glb", true)
 
-  // Add swaying animation
-
-
-  return (
+ return (
     <group ref={ref}>
-      <primitive object={scene.clone()} scale={scale * 2} />
-    </group>
+    <primitive object={scene.clone()} scale={100} position={[0, -20, 0]} />
+  </group>
   )
 }
 
@@ -87,7 +79,7 @@ function CoralViewer({ coral }) {
       </div>
 
       <div className="h-[300px] w-full rounded-none border border-gray-800 border-y-0 bg-gradient-to-b from-gray-900 to-black/50">
-      <Canvas camera={{ position: [15, 175, 15], fov: 30 }}>
+      <Canvas camera={{ position: [15, 100, 15], fov: 30 }}>
           <Suspense fallback={<Html center><p>Loading...</p></Html>}>
             <ambientLight intensity={1} />
             <directionalLight position={[5, 5, 5]} intensity={1} />
