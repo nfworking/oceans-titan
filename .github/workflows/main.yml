@@ -20,4 +20,4 @@ jobs:
             New-Item -ItemType Directory -Path "D:\test"
           }
           Copy-Item -Path "$env:GITHUB_WORKSPACE\*" -Destination "D:\test" -Recurse
-        shell: pwsh
+        shell: powershell
