@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
-  "productName": "australia-oceans",
-  "version": "1.4.2",
+  "productName": "Australia Oceans",
+  "version": "1.5.3",
   "identifier": "Oceans.dev",
   "build": {
     "frontendDist": "../out",
