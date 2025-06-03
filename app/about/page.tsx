@@ -2,47 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { Upload, X, Check } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { NavBar } from "@/components/nav-bar"
 import { Footer } from "@/components/footer"
 
 export default function AboutPage() {
-  const [profileImage, setProfileImage] = useState<string | null>(null)
-  const [isUploading, setIsUploading] = useState(false)
-  const [uploadSuccess, setUploadSuccess] = useState(false)
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setIsUploading(true)
-
-      // Simulate upload delay
-      setTimeout(() => {
-        const reader = new FileReader()
-        reader.onload = (event) => {
-          setProfileImage(event.target?.result as string)
-          setIsUploading(false)
-          setUploadSuccess(true)
-
-          // Reset success message after 3 seconds
-          setTimeout(() => {
-            setUploadSuccess(false)
-          }, 3000)
-        }
-        reader.readAsDataURL(file)
-      }, 1500)
-    }
-  }
-
-  const removeImage = () => {
-    setProfileImage(null)
-  }
-
   return (
     <div className="min-h-screen bg-black text-white">
       <NavBar />
@@ -72,66 +39,11 @@ export default function AboutPage() {
               <Card className="overflow-hidden border-gray-800 bg-gray-900">
                 <CardContent className="p-0">
                   <div className="relative aspect-square w-full overflow-hidden bg-gray-800">
-                    {profileImage ? (
-                      <>
-                        <Image src={profileImage || "/placeholder.svg"} alt="Profile" fill className="object-cover" />
-                        <button
-                          onClick={removeImage}
-                          className="absolute right-2 top-2 rounded-full bg-black/70 p-1 text-white transition-colors hover:bg-black"
-                        >
-                          <X className="h-5 w-5" />
-                        </button>
-                      </>
-                    ) : (
-                      <div className="flex h-full w-full flex-col items-center justify-center p-6 text-center">
-                        <div className="mb-4 rounded-full bg-gray-700 p-4">
-                          <Upload className="h-8 w-8 text-gray-400" />
-                        </div>
-                        <p className="mb-2 text-gray-300">Upload your profile photo</p>
-                        <p className="text-sm text-gray-500">Recommended size: 400x400px</p>
-                      </div>
-                    )}
+                    {/* Static profile image */}
+                    <Image src="/pro.jpg" alt="Profile" fill className="object-cover" />
                   </div>
 
                   <div className="p-6">
-                    <div className="mb-4">
-                      <label htmlFor="profile-upload" className="w-full">
-                        <div
-                          className={`relative flex w-full cursor-pointer items-center justify-center rounded-md border border-gray-700 px-4 py-2 text-sm font-medium transition-colors ${
-                            isUploading
-                              ? "bg-gray-800 text-gray-400"
-                              : "bg-teal-900/30 text-teal-400 hover:bg-teal-900/50"
-                          }`}
-                        >
-                          {isUploading ? (
-                            <>
-                              <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-gray-500 border-t-white"></div>
-                              Uploading...
-                            </>
-                          ) : profileImage ? (
-                            <>Change Photo</>
-                          ) : (
-                            <>Upload Photo</>
-                          )}
-                        </div>
-                        <input
-                          id="profile-upload"
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageUpload}
-                          className="sr-only"
-                          disabled={isUploading}
-                        />
-                      </label>
-                    </div>
-
-                    {uploadSuccess && (
-                      <div className="mb-4 flex items-center rounded-md bg-green-900/20 p-2 text-sm text-green-400">
-                        <Check className="mr-2 h-4 w-4" />
-                        Photo uploaded successfully!
-                      </div>
-                    )}
-
                     <div className="space-y-4">
                       <div>
                         <h3 className="text-lg font-bold text-white">Dr. Marina Corales</h3>
@@ -304,38 +216,9 @@ export default function AboutPage() {
                           />
                         </div>
                         <h4 className="text-lg font-bold text-white">Dr. Aisha Waters</h4>
-                        <p className="mb-2 text-sm text-teal-400">Policy Advisor</p>
+                        <p className="mb-2 text-sm text-teal-400">Marine Ecologist</p>
                         <p className="text-sm text-gray-300">
-                          Works with governments and international organizations to advocate for stronger marine
-                          protection policies.
-                        </p>
-                      </div>
-
-                      <div className="rounded-lg bg-gray-800 p-4">
-                        <div className="mb-3 aspect-square w-full overflow-hidden rounded-md bg-gray-700">
-                          <Image
-                            src="/placeholder.svg?height=200&width=200"
-                            alt="Team Member"
-                            width={200}
-                            height={200}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                        <h4 className="text-lg font-bold text-white">Carlos Marino</h4>
-                        <p className="mb-2 text-sm text-teal-400">Field Operations</p>
-                        <p className="text-sm text-gray-300">
-                          Leads our diving team and oversees the implementation of underwater conservation activities.
-                        </p>
-                      </div>
-
-                      <div className="rounded-lg bg-gray-800 p-4 text-center">
-                        <div className="mb-3 flex aspect-square w-full items-center justify-center rounded-md bg-gray-700">
-                          <p className="text-gray-400">Join Our Team</p>
-                        </div>
-                        <h4 className="text-lg font-bold text-white">We're Hiring!</h4>
-                        <p className="mb-2 text-sm text-teal-400">Multiple Positions</p>
-                        <p className="text-sm text-gray-300">
-                          Passionate about coral conservation? Check our careers page for current openings.
+                          Focuses on coral reef ecosystem dynamics and monitoring environmental impacts on reef health.
                         </p>
                       </div>
                     </div>
@@ -346,77 +229,22 @@ export default function AboutPage() {
               <TabsContent value="history" className="mt-0">
                 <Card className="border-gray-800 bg-gray-900">
                   <CardContent className="p-6">
-                    <h2 className="mb-6 text-2xl font-bold text-white">Our History</h2>
-
-                    <div className="relative border-l border-gray-700 pl-6">
-                      <div className="mb-10">
-                        <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-teal-500"></div>
-                        <h3 className="text-xl font-bold text-white">2010: The Beginning</h3>
-                        <p className="mb-2 text-sm text-teal-400">Foundation of CoralGuard</p>
-                        <p className="text-gray-300">
-                          CoralGuard was founded by Dr. Marina Corales after witnessing the devastating effects of coral
-                          bleaching in the Caribbean. Starting with a small team of dedicated marine biologists, the
-                          organization began documenting coral health and raising awareness about threats to reef
-                          ecosystems.
-                        </p>
-                      </div>
-
-                      <div className="mb-10">
-                        <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-teal-500"></div>
-                        <h3 className="text-xl font-bold text-white">2013: First Restoration Project</h3>
-                        <p className="mb-2 text-sm text-teal-400">Florida Keys Coral Nursery</p>
-                        <p className="text-gray-300">
-                          We established our first coral nursery in the Florida Keys, growing staghorn and elkhorn coral
-                          fragments for transplantation to degraded reef areas. This project demonstrated the viability
-                          of active restoration as a conservation strategy.
-                        </p>
-                      </div>
-
-                      <div className="mb-10">
-                        <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-teal-500"></div>
-                        <h3 className="text-xl font-bold text-white">2015: International Expansion</h3>
-                        <p className="mb-2 text-sm text-teal-400">Southeast Asia Programs</p>
-                        <p className="text-gray-300">
-                          CoralGuard expanded its operations to Southeast Asia, partnering with local organizations in
-                          Indonesia and the Philippines to implement community-based conservation programs. These
-                          initiatives focused on reducing destructive fishing practices and establishing locally managed
-                          marine protected areas.
-                        </p>
-                      </div>
-
-                      <div className="mb-10">
-                        <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-teal-500"></div>
-                        <h3 className="text-xl font-bold text-white">2018: Research Breakthrough</h3>
-                        <p className="mb-2 text-sm text-teal-400">Heat-Resistant Coral Strains</p>
-                        <p className="text-gray-300">
-                          Our research team identified several coral strains with enhanced resistance to thermal stress,
-                          a critical discovery for coral conservation in the face of rising ocean temperatures. This
-                          research has informed our selective breeding program for restoration projects.
-                        </p>
-                      </div>
-
-                      <div className="mb-10">
-                        <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-teal-500"></div>
-                        <h3 className="text-xl font-bold text-white">2020: Educational Initiative</h3>
-                        <p className="mb-2 text-sm text-teal-400">Launch of Digital Learning Platform</p>
-                        <p className="text-gray-300">
-                          We launched our comprehensive digital learning platform, providing educational resources about
-                          coral reef ecosystems to schools, universities, and the general public. This initiative has
-                          reached over 100,000 students worldwide.
-                        </p>
-                      </div>
-
-                      <div>
-                        <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full bg-teal-500"></div>
-                        <h3 className="text-xl font-bold text-white">Today: Ongoing Mission</h3>
-                        <p className="mb-2 text-sm text-teal-400">Global Conservation Efforts</p>
-                        <p className="text-gray-300">
-                          Today, CoralGuard operates in 12 countries, with over 50 full-time staff and hundreds of
-                          volunteers. We continue to expand our research, restoration, and education programs, working
-                          tirelessly to protect coral reefs for future generations.
-                        </p>
-                      </div>
-                    </div>
+                    <h2 className="mb-4 text-2xl font-bold text-white">Our History</h2>
+                    <p className="mb-4 text-gray-300">
+                      Founded in 2008 by Dr. Marina Corales, CoralGuard began as a small community initiative focused on
+                      restoring coral reefs damaged by pollution and climate events. Over the years, we have grown into
+                      a global organization with partnerships across several countries, dedicated to marine conservation
+                      and research.
+                    </p>
+                    <p className="mb-4 text-gray-300">
+                      Key milestones include launching the CoralRescue program in 2012, expanding research collaborations
+                      with universities worldwide, and developing educational programs that have reached thousands of
+                      students and community members.
+                    </p>
+                    <p className="text-gray-300">
+                      Our journey continues with a commitment to innovation, collaboration, and impactful conservation
+                      efforts to safeguard the future of coral reefs.
+                    </p>
                   </CardContent>
                 </Card>
               </TabsContent>

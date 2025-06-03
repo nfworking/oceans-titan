@@ -272,7 +272,7 @@ export default function Home() {
               </Link>
             </div>
             <img
-              src="/images/3d-gallery-preview.jpg"
+              src="/gal.png"
               alt="3D Coral Reef Gallery Preview"
               className="h-full w-full object-cover"
             />
@@ -306,7 +306,7 @@ export default function Home() {
             >
               <div className="aspect-video w-full overflow-hidden">
                 <img
-                  src="/placeholder.svg?height=300&width=500"
+                  src="/s1.jpg"
                   alt="Coral restoration project"
                   className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                 />
@@ -332,7 +332,7 @@ export default function Home() {
             >
               <div className="aspect-video w-full overflow-hidden">
                 <img
-                  src="/placeholder.svg?height=300&width=500"
+                  src="/s2.jpg"
                   alt="Marine protected area"
                   className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                 />
@@ -358,7 +358,7 @@ export default function Home() {
             >
               <div className="aspect-video w-full overflow-hidden">
                 <img
-                  src="/placeholder.svg?height=300&width=500"
+                  src="/s3.webp"
                   alt="Community-led conservation"
                   className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                 />
